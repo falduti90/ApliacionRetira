@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
-     public class ControlPendientes
+    //Clase Entidad para  poder capturar los datos de la  Data Base
+    public class ControlPendientes
     {
-
         public string IdMaterial { get; set; }
         public int CantidadPendiente { get; set; }
         public string Descripcion { get; set; }

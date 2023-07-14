@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
+
+    //Clase Entidad para  poder capturar los datos de la  Data Base
     public class ControlCabecera
     {
         public string IdRemito { get; set; }

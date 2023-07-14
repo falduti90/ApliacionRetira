@@ -11,6 +11,8 @@ namespace CapaDatos
 {
     public class CD_ControlEntregado
     {
+        //Funcion que devuelve una lista con todos los articulos entregados, esto varia dependiendo del remito.
+        //Esta lista llena la parte izquirda de la tabla 'Pendietes'.
         public List<ControlEntregadas> Listar(string Muelle)
         {
 

@@ -11,11 +11,13 @@ namespace CapaPresentacion.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
         }
 
+        // Metodo  que  combierte los datos  en un selectlistitem para poder mostrarlo en la vista.
         public ActionResult Entrega()
         {
             List<Muelle> Lista = new List<Muelle>();
@@ -39,11 +41,14 @@ namespace CapaPresentacion.Controllers
             ViewBag.items = items;
             return View();
         }
+
         public ActionResult Turno()
         {
             return View();
         }
 
+        // Metodo  que devuelve Jsonresult que  se usa en la vista de entrega.
+        // Esto permite poder llenar la tabla de pendietes que  esta declara en dicha vista
         [HttpGet]
         public JsonResult ListarPendientes(string Muelle)
         {
@@ -54,6 +59,9 @@ namespace CapaPresentacion.Controllers
             return Json(new { data = Lista }, JsonRequestBehavior.AllowGet);
         }
 
+
+        // Metodo  que devuelve Jsonresult que  se usa en la vista de entrega.
+        // Esto permite poder llenar la tabla de Entregadas que  esta declara en dicha vista.
         [HttpGet]
         public JsonResult ListarEntregadas(string Muelle)
         {
@@ -65,6 +73,8 @@ namespace CapaPresentacion.Controllers
             return Json(new { data = Lista }, JsonRequestBehavior.AllowGet);
         }
 
+        // Metodo  que devuelve Jsonresult que  se usa en la vista de entregas.
+        // Esto permite poder llenar  la cabecera que  esta declara en dicha vista.
         [HttpPost]
         public JsonResult ListarCabecera(string Muelle)
         {

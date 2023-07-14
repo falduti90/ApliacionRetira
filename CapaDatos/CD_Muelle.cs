@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
+    //Funcion que devuelve una lista con todos datoas del remito.
+    //Esta lista llena la cabecera  de pagina.
     public class CD_Muelle
     {
         public List<Muelle> Listar()
