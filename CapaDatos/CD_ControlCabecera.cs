@@ -11,6 +11,8 @@ namespace CapaDatos
 {
     public class CD_ControlCabecera
     {
+        //funcion que devuelve una lista con los datos de la cabecera .  Devuelve  3  campos que se usan para  mostrar datos.
+        //Esto quedo definido para separar los datos  de la cabecera 
         public List<ControlCabecera> Listar(string Muelle)
         {
 

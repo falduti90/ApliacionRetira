@@ -12,7 +12,8 @@ namespace CapaDatos
 {
     public class CD_ControlPendiente
     {
-
+        //Funcion que devuelve una lista con todos los articulos pendiente de entrega , esto varia dependiendo del remito.
+        //Esta lista llena la parte izquirda de la tabla 'Pendietes'.
         public List<ControlPendientes> Listar(string Muelle)
         {
   
