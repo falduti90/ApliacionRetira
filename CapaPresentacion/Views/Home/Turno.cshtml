@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Turno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Tabla con buscador</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="searchTable()" />
+    <table id="myTable">
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>Michael Johnson</td>
+            <td>35</td>
+        </tr>
+        <!-- Agrega más filas aquí -->
+    </table>
+
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1]; // Filtrar por la primera columna
+
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>

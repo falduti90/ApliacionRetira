@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewBag.Title = "Entrega";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+            crossorigin="anonymous"></script>
+</head>
+
+
+
+<div class="card-body" style="text-align: justify; font-family: 'Times New Roman'; font-weight:400; font-size:large; background-color:white;">
+    @*<form action="@Url.Action("ListarCabecera", "Home")" method="post"></form>*@
+    <div class="row">
+        <div class="col-md-2">
+            <label for="txtmuelle" class="form-label"> Muelle</label>
+            @Html.DropDownList("datos", items, "Elegir un Muelle", new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-2">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <button class="btn btn-info" id="btnbuscar" type="button" style="display:none;"></button>
+        </div>
+
+        <div class="col-md-2">
+            <label for="txtnrocliente" class="form-label""> Nro Cliente</label>
+            <input type="text" class="form-control" id="txtnrocliente" disabled style="width: 100%; background-color: white; color: black; font-weight: bold " />
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" style="color: black;">Razon Social</label>
+            <input type="text" class="form-control" name="Razon" id="txtrazon" disabled style="width: 100%;background-color: white; color: black; font-weight: bold " />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Nro Remito</label>
+            <input type="text" class="form-control" name="Razon" id="txtremito" disabled style="background-color: white; color: black; font-weight:bold " />
+        </div>
+    </div>
+</div>
+<hr style="color:black;" />
+
+
+<section id="pantalla-divida" style="display:flex;">
+    <div style="background-color: #912C28; height: 100vh; width: 50%; border-style: solid; border-color: black; color: black; font-weight: 700; overflow-y:scroll; ">
+        <h4 style='text-align: center; color: aliceblue; font-weight: 700; font-family: Courier New, Courier, monospace'>Productos Pendientes </h4>
+        <hr style="color: #ffffff; border-top: 2px solid #ffffff;" />
+        <div>
+            <table id="tablaPendiente" class="table" style="width: 100%">
+                <thead style=" margin:0px">
+                    <tr style="background-color: #912C28; color: aliceblue">
+                        <th style="width:17%;"> <h6 style="text-align:left; margin-left:0px">Cod Articulo</h6> </th>
+                        <th style="width:70%">  <h6  style="text-align:center">Descripcion</h6></th>
+                        <th style="width:3%">   <h6  style="text-align: left">Cantidad</h6></th>
+                    </tr>
+                </thead>
+
+                @*<tbody>
+                    <tr style="background-color: #003052; color: aliceblue">
+                        <td><h6 style="text-align:left; margin-left:0px">Codigo</h6></td>
+                        <td><h6 style="text-align:center; margin-left:0px">Descripcion</h6></td>
+                        <td><h6 style="text-align:left; margin-left:0px">Cantidad</h6></td>
+                    </tr>
+                </tbody>*@
+
+            </table>
+        </div>
+        <hr style=" color: #ffffff; border-top: 4px solid #ffffff;" />
+    </div>
+
+    <div style="background-color: #003052; height: 100vh; width: 50%; border-style: solid; border-color: black; font-weight: 700; overflow-y: scroll">
+        <h4 style='text-align:center; color:aliceblue; font-weight: 700; font-family:Courier New, Courier, monospace'>Productos Entregados </h4>
+        <hr style="color: #ffffff; border-top: 2px solid #ffffff;" />
+        <div>
+            <table id="tablaEntregado" class="table" style="width: 100%;">
+
+                <thead>
+                    <tr style="background-color: #003052; color: aliceblue">
+                        <th style="width: 17%"> <h6 style="text-align:left; margin-left:0px">Cod Articulo</h6> </th>
+                        <th style="width:70%">  <h6 style="text-align:center">Descripcion</h6></th>
+                        <th style="width: 3%">  <h6 style="text-align: left">Cantidad</h6></th>
+                    </tr>
+                </thead>
+
+                @*<tbody>
+                    <tr style="background-color: #003052; color: aliceblue">
+                        <td>Codigo</td>
+                        <td>Descripcion</td>
+                        <td>Cantidad </td>
+                    </tr>
+                </tbody>*@
+
+            </table>
+        </div>
+
+        <hr style="color: #ffffff; border-top: 4px solid #ffffff;" />
+    </div>
+
+</section>
+
+
+
+@section scripts {
+    <script>
+
+                                        /*Funcion para ejecutar boton*/
+        /********************************************************************************************/
+
+        $("a").trigger("click");
+        var tiempo = 3000,
+            interval = setInterval(function () {
+                $("#btnbuscar").trigger("click");
+            }, tiempo);
+
+        $("#btnbuscar").click(function () { });
+
+
+        /********************************************************************************************/
+
+
+
+                                /*Funcion que trae los datos de la cabecera*/
+        /********************************************************************************************/
+         $(document).ready(function () {
+          var UrlCabecera ='@Url.Action("ListarCabecera", "Home")'
+          $("#btnbuscar").click(function () {
+            var UrlCabecera =
+              '@Url.Action("ListarCabecera", "Home")' +
+              "?Muelle=" +
+              $("#datos option:selected").val();
+            jQuery.ajax({
+              url: UrlCabecera,
+              type: "POST",
+              dataType: "json",
+                success: function (data) {
+
+                    if (data.data != "") {
+                        $("#txtnrocliente").val(data.data[0].IdCiente);
+                        $("#txtremito").val(data.data[0].IdRemito);
+                        $("#txtrazon").val(data.data[0].Descripcion);
+                    }
+                    else {
+                        $("#txtnrocliente").val("");
+                        $("#txtremito").val("");
+                        $("#txtrazon").val("");
+                    }
+                },
+            });
+         });
+        });
+
+        /********************************************************************************************/
+
+
+        /**************************************************************************** */
+
+
+                            /*Funcion que llena la tabla pendientes*/
+        /********************************************************************************************/
+         var UrlPendientes =
+        '@Url.Action("ListarPendientes","Home")' +
+         "?Muelle=" +
+         $("#datos option:selected").val();
+
+        var tabladataP;
+
+        tabladataP = $("#tablaPendiente").DataTable({
+            responsive: true,
+            ordering: false,
+
+            ajax: {
+                url: UrlPendientes,
+                type: "GET",
+                dataType: "json",
+            },
+            columns: [
+                { data: "IdMaterial" },
+                { data: "Descripcion" },
+                { data: "CantidadPendiente" },
+            ],
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+            },
+        });
+
+        /********************************************************************************************/
+
+                        /*Funcion que llena la tabla Entregadas  */
+        /********************************************************************************************/
+        var UrlEntregado =
+        '@Url.Action("ListarEntregadas","Home")' +
+        "?Muelle=" +
+         $("#datos option:selected").val();
+
+        var tabladataE;
+
+        tabladataE = $("#tablaEntregado").DataTable({
+          responsive: true,
+          ordering: false,
+          ajax: {
+            url: UrlEntregado,
+            type: "GET",
+            dataType: "json",
+          },
+          columns: [
+            { data: "IdMaterial" },
+            { data: "Descripcion" },
+            { data: "CantidadEntregada" },
+          ],
+          language: {
+            url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+          },
+        });
+        /********************************************************************************************/
+
+                        /* Funcion  que  setea las variables  */
+        /********************************************************************************************/
+                    /*
+                    Funcion que  cuando ejecuta  el boton  crea nuevas variables
+                    donde concatena el metodo+idmuelle.
+                    */
+        $("#btnbuscar").on("click", function () {
+             var nueva_urlP =
+            '@Url.Action("ListarPendientes","Home")' +
+            "?Muelle=" +
+            $("#datos option:selected").val();
+        
+             var nueva_urlE =
+            '@Url.Action("ListarEntregadas","Home")' +
+            "?Muelle=" +
+            $("#datos option:selected").val();
+        
+            tabladataP.ajax.url(nueva_urlP).load();
+        
+            tabladataE.ajax.url(nueva_urlE).load();
+        });
+        /********************************************************************************************/
+    </script>
+}
